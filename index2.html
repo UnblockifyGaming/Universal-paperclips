@@ -3,6 +3,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="interface.css" />
+        <link rel="icon" href="paperclips.png" type="image/x-icon">
         <!-- Global Site Tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107491380-1"></script>
         <script>
@@ -943,230 +944,262 @@
         <script type="text/javascript" src="globals.js"></script>      
         <script type="text/javascript" src="projects.js"></script>   
         <script type="text/javascript" src="main.js"></script>
+
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal paperclips</title>
+    <style>
+        /* Style for the Mod Menu button */
+        #modMenuButton {
+            position: fixed;
+            bottom: 20px;  /* Position from the bottom */
+            right: 20px;   /* Position from the right */
+            padding: 10px 15px; /* Button padding */
+            font-size: 16px;    /* Button font size */
+            background-color: #1E90FF; /* Button color */
+            color: white;    /* Text color */
+            border: none;    /* No border */
+            border-radius: 8px; /* Rounded corners */
+            cursor: pointer;  /* Pointer cursor on hover */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* Shadow effect */
+        }
         
+        /* Change button color on hover */
+        #modMenuButton:hover {
+            background-color: #1C86EE; /* Darker color on hover */
+        }
+    </style>
+</head>
+<body>
+    <!-- Mod Menu Button -->
+    <button id="modMenuButton">Mod Menu</button>
 
-
-
-        <script>// ==UserScript==
-            // @name         Universal Paperclips MOD MENU
-            // @namespace    http://tampermonkey.net/
-            // @version      2024-10-29
-            // @description  try to take over the world!
-            // @author       You
-            // @match        https://paperclips.brucey4all.com/index2
-            // @icon         https://www.google.com/s2/favicons?sz=64&domain=brucey4all.com
-            // @grant        none
-            // ==/UserScript==
-            
-            // Define the mod menu with draggable functionality
-            function PaperclipsModMenu() {
-                this.createMenu();
-                this.makeDraggable(document.getElementById('mod-menu'));
-            }
-            
-            PaperclipsModMenu.prototype.createMenu = function() {
-                let menu = document.createElement('div');
-                menu.id = 'mod-menu';
-                menu.style.position = 'fixed';
-                menu.style.top = '60px';
-                menu.style.left = '60px';
-                menu.style.backgroundColor = 'rgba(30, 30, 30, 0.95)';
-                menu.style.color = 'white';
-                menu.style.padding = '15px';
-                menu.style.zIndex = '1000';
-                menu.style.borderRadius = '12px';
-                menu.style.width = '300px';
-                menu.style.height = '400px'; // Set a fixed height
-                menu.style.overflowY = 'scroll'; // Enable vertical scrolling
-                menu.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.4)';
-                menu.style.fontFamily = 'Arial, sans-serif';
-                menu.style.cursor = 'grab';
-            
-                // Menu header
-                let title = document.createElement('div');
-                title.id = 'mod-menu-header';
-                title.innerText = '🧩 Paperclips Mod Menu';
-                title.style.margin = '0';
-                title.style.fontSize = '18px';
-                title.style.fontWeight = 'bold';
-                title.style.cursor = 'move';
-                title.style.textAlign = 'center';
-                menu.appendChild(title);
-            
-                // Add buttons and input fields
-                this.addButton(menu, 'Set Paperclips', this.setPaperclips);
-                this.addInputField(menu, 'Paperclips Amount', 'paperclipsAmount');
-            
-                this.addButton(menu, 'Unlock Investments', this.unlockInvestments);
-                this.addButton(menu, 'Unlock Tournaments', this.unlockTournaments);
-            
-                this.addButton(menu, 'Set Yomi', this.setYomi);
-                this.addInputField(menu, 'Yomi Amount', 'yomiAmount');
-            
-                this.addButton(menu, 'Set Operations', this.setOperations);
-                this.addInputField(menu, 'Operations', 'operationsAmount');
-            
-                this.addButton(menu, 'Set Processors', this.setProcessors);
-                this.addInputField(menu, 'Processor Level', 'processorLevel');
-            
-                this.addButton(menu, 'Set Trust', this.setTrust);
-                this.addInputField(menu, 'Trust Level', 'trustLevel');
-            
-                this.addButton(menu, 'Set Memory', this.setMemory);
-                this.addInputField(menu, 'Memory Amount', 'memoryAmount');
-            
-                this.addButton(menu, 'Set Creativity', this.setCreativity);
-                this.addInputField(menu, 'Creativity Amount', 'creativityAmount');
-            
-                this.addButton(menu, 'Unlock All Upgrades', this.unlockAllUpgrades);
-            
-                this.addButton(menu, 'Get Wire', this.getWire);
-                this.addInputField(menu, 'Wire Amount', 'wireAmount');
-            
-                document.body.appendChild(menu);
-            };
-            
-            PaperclipsModMenu.prototype.addButton = function(parent, text, onClick) {
-                let button = document.createElement('button');
-                button.innerText = text;
-                button.style.marginTop = '10px';
-                button.style.width = '100%';
-                button.style.padding = '10px';
-                button.style.fontSize = '14px';
-                button.style.fontWeight = 'bold';
-                button.style.backgroundColor = '#1E90FF';
-                button.style.border = 'none';
-                button.style.color = 'white';
-                button.style.borderRadius = '8px';
-                button.style.cursor = 'pointer';
-                button.onclick = onClick;
-                button.onmouseover = () => button.style.backgroundColor = '#1C86EE';
-                button.onmouseout = () => button.style.backgroundColor = '#1E90FF';
-                parent.appendChild(button);
-            };
-            
-            PaperclipsModMenu.prototype.addInputField = function(parent, placeholder, id) {
-                let input = document.createElement('input');
-                input.placeholder = placeholder;
-                input.id = id;
-                input.style.marginTop = '10px';
-                input.style.width = '100%';
-                input.style.padding = '8px';
-                input.style.border = '1px solid #ddd';
-                input.style.borderRadius = '6px';
-                input.style.fontSize = '14px';
-                parent.appendChild(input);
-            };
-            
-            // Define functions for each button
-            PaperclipsModMenu.prototype.setPaperclips = function() {
-                let amount = parseInt(document.getElementById('paperclipsAmount').value);
-                if (!isNaN(amount)) {
-                    window.clips = amount;
-                }
-            };
-            
-            PaperclipsModMenu.prototype.unlockInvestments = function() {
-                window.investmentEngineFlag = 1;
-            };
-            
-            PaperclipsModMenu.prototype.unlockTournaments = function() {
-                window.strategyEngineFlag = 1;
-            };
-            
-            PaperclipsModMenu.prototype.setYomi = function() {
-                let amount = parseInt(document.getElementById('yomiAmount').value);
-                if (!isNaN(amount)) {
-                    window.yomi = amount;
-                }
-            };
-            
-            PaperclipsModMenu.prototype.setOperations = function() {
-                let amount = parseInt(document.getElementById('operationsAmount').value);
-                if (!isNaN(amount)) {
-                    window.ops = amount;
-                }
-            };
-            
-            PaperclipsModMenu.prototype.setProcessors = function() {
-                let level = parseInt(document.getElementById('processorLevel').value);
-                if (!isNaN(level)) {
-                    window.processors = level;
-                }
-            };
-            
-            PaperclipsModMenu.prototype.setTrust = function() {
-                let level = parseInt(document.getElementById('trustLevel').value);
-                if (!isNaN(level)) {
-                    window.trust = level;
-                }
-            };
-            
-            PaperclipsModMenu.prototype.setMemory = function() {
-                let amount = parseInt(document.getElementById('memoryAmount').value);
-                if (!isNaN(amount)) {
-                    window.memory = amount;
-                }
-            };
-            
-            PaperclipsModMenu.prototype.setCreativity = function() {
-                let amount = parseInt(document.getElementById('creativityAmount').value);
-                if (!isNaN(amount)) {
-                    window.creativity = amount;
-                }
-            };
-            
-            PaperclipsModMenu.prototype.unlockAllUpgrades = function() {
-                if (window.upgradeList) {
-                    for (let i = 0; i < window.upgradeList.length; i++) {
-                        window.upgradeList[i] = true;
+    <script>
+        // Button click handler
+        document.getElementById('modMenuButton').onclick = function() {
+            let code = prompt("Enter code:");
+            if (code === "menu") {
+                // Insert mod menu JavaScript code if code is correct
+                const script = document.createElement("script");
+                script.innerHTML = `
+                    // Define the mod menu with draggable functionality
+                    function PaperclipsModMenu() {
+                        this.createMenu();
+                        this.makeDraggable(document.getElementById('mod-menu'));
                     }
-                }
-            };
-            
-            PaperclipsModMenu.prototype.getWire = function() {
-                let amount = parseInt(document.getElementById('wireAmount').value);
-                if (!isNaN(amount)) {
-                    window.wire = amount;
-                }
-            };
-            
-            // Make the menu draggable
-            PaperclipsModMenu.prototype.makeDraggable = function(element) {
-                let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-                let header = document.getElementById('mod-menu-header');
-                header.onmousedown = dragMouseDown;
-            
-                function dragMouseDown(e) {
-                    e = e || window.event;
-                    e.preventDefault();
-                    pos3 = e.clientX;
-                    pos4 = e.clientY;
-                    document.onmouseup = closeDragElement;
-                    document.onmousemove = elementDrag;
-                }
-            
-                function elementDrag(e) {
-                    e = e || window.event;
-                    e.preventDefault();
-                    pos1 = pos3 - e.clientX;
-                    pos2 = pos4 - e.clientY;
-                    pos3 = e.clientX;
-                    pos4 = e.clientY;
-                    element.style.top = (element.offsetTop - pos2) + "px";
-                    element.style.left = (element.offsetLeft - pos1) + "px";
-                }
-            
-                function closeDragElement() {
-                    document.onmouseup = null;
-                    document.onmousemove = null;
-                }
-            };
-            
-            // Initialize the Mod Menu
-            new PaperclipsModMenu();
 
-            // Create and style the button
+                    PaperclipsModMenu.prototype.createMenu = function() {
+                        let menu = document.createElement('div');
+                        menu.id = 'mod-menu';
+                        menu.style.position = 'fixed';
+                        menu.style.top = '60px';
+                        menu.style.left = '60px';
+                        menu.style.backgroundColor = 'rgba(30, 30, 30, 0.95)';
+                        menu.style.color = 'white';
+                        menu.style.padding = '15px';
+                        menu.style.zIndex = '1000';
+                        menu.style.borderRadius = '12px';
+                        menu.style.width = '300px';
+                        menu.style.height = '400px';
+                        menu.style.overflowY = 'scroll';
+                        menu.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.4)';
+                        menu.style.fontFamily = 'Arial, sans-serif';
+                        menu.style.cursor = 'grab';
+
+                        // Menu header
+                        let title = document.createElement('div');
+                        title.id = 'mod-menu-header';
+                        title.innerText = '🧩 Paperclips Mod Menu';
+                        title.style.margin = '0';
+                        title.style.fontSize = '18px';
+                        title.style.fontWeight = 'bold';
+                        title.style.cursor = 'move';
+                        title.style.textAlign = 'center';
+                        menu.appendChild(title);
+
+                        // Add buttons and input fields
+                        this.addButton(menu, 'Set Paperclips', this.setPaperclips);
+                        this.addInputField(menu, 'Paperclips Amount', 'paperclipsAmount');
+
+                        this.addButton(menu, 'Unlock Investments', this.unlockInvestments);
+                        this.addButton(menu, 'Unlock Tournaments', this.unlockTournaments);
+
+                        this.addButton(menu, 'Set Yomi', this.setYomi);
+                        this.addInputField(menu, 'Yomi Amount', 'yomiAmount');
+
+                        this.addButton(menu, 'Set Operations', this.setOperations);
+                        this.addInputField(menu, 'Operations', 'operationsAmount');
+
+                        this.addButton(menu, 'Set Processors', this.setProcessors);
+                        this.addInputField(menu, 'Processor Level', 'processorLevel');
+
+                        this.addButton(menu, 'Set Trust', this.setTrust);
+                        this.addInputField(menu, 'Trust Level', 'trustLevel');
+
+                        this.addButton(menu, 'Set Memory', this.setMemory);
+                        this.addInputField(menu, 'Memory Amount', 'memoryAmount');
+
+                        this.addButton(menu, 'Set Creativity', this.setCreativity);
+                        this.addInputField(menu, 'Creativity Amount', 'creativityAmount');
+
+                        this.addButton(menu, 'Unlock All Upgrades', this.unlockAllUpgrades);
+
+                        this.addButton(menu, 'Get Wire', this.getWire);
+                        this.addInputField(menu, 'Wire Amount', 'wireAmount');
+
+                        document.body.appendChild(menu);
+                    };
+
+                    PaperclipsModMenu.prototype.addButton = function(parent, text, onClick) {
+                        let button = document.createElement('button');
+                        button.innerText = text;
+                        button.style.marginTop = '10px';
+                        button.style.width = '100%';
+                        button.style.padding = '10px';
+                        button.style.fontSize = '14px';
+                        button.style.fontWeight = 'bold';
+                        button.style.backgroundColor = '#1E90FF';
+                        button.style.border = 'none';
+                        button.style.color = 'white';
+                        button.style.borderRadius = '8px';
+                        button.style.cursor = 'pointer';
+                        button.onclick = onClick;
+                        button.onmouseover = () => button.style.backgroundColor = '#1C86EE';
+                        button.onmouseout = () => button.style.backgroundColor = '#1E90FF';
+                        parent.appendChild(button);
+                    };
+
+                    PaperclipsModMenu.prototype.addInputField = function(parent, placeholder, id) {
+                        let input = document.createElement('input');
+                        input.placeholder = placeholder;
+                        input.id = id;
+                        input.style.marginTop = '10px';
+                        input.style.width = '100%';
+                        input.style.padding = '8px';
+                        input.style.border = '1px solid #ddd';
+                        input.style.borderRadius = '6px';
+                        input.style.fontSize = '14px';
+                        parent.appendChild(input);
+                    };
+
+                    // Define functions for each button
+                    PaperclipsModMenu.prototype.setPaperclips = function() {
+                        let amount = parseInt(document.getElementById('paperclipsAmount').value);
+                        if (!isNaN(amount)) {
+                            window.clips = amount;
+                        }
+                    };
+
+                    PaperclipsModMenu.prototype.unlockInvestments = function() {
+                        window.investmentEngineFlag = 1;
+                    };
+
+                    PaperclipsModMenu.prototype.unlockTournaments = function() {
+                        window.strategyEngineFlag = 1;
+                    };
+
+                    PaperclipsModMenu.prototype.setYomi = function() {
+                        let amount = parseInt(document.getElementById('yomiAmount').value);
+                        if (!isNaN(amount)) {
+                            window.yomi = amount;
+                        }
+                    };
+
+                    PaperclipsModMenu.prototype.setOperations = function() {
+                        let amount = parseInt(document.getElementById('operationsAmount').value);
+                        if (!isNaN(amount)) {
+                            window.ops = amount;
+                        }
+                    };
+
+                    PaperclipsModMenu.prototype.setProcessors = function() {
+                        let level = parseInt(document.getElementById('processorLevel').value);
+                        if (!isNaN(level)) {
+                            window.processors = level;
+                        }
+                    };
+
+                    PaperclipsModMenu.prototype.setTrust = function() {
+                        let level = parseInt(document.getElementById('trustLevel').value);
+                        if (!isNaN(level)) {
+                            window.trust = level;
+                        }
+                    };
+
+                    PaperclipsModMenu.prototype.setMemory = function() {
+                        let amount = parseInt(document.getElementById('memoryAmount').value);
+                        if (!isNaN(amount)) {
+                            window.memory = amount;
+                        }
+                    };
+
+                    PaperclipsModMenu.prototype.setCreativity = function() {
+                        let amount = parseInt(document.getElementById('creativityAmount').value);
+                        if (!isNaN(amount)) {
+                            window.creativity = amount;
+                        }
+                    };
+
+                    PaperclipsModMenu.prototype.unlockAllUpgrades = function() {
+                        if (window.upgradeList) {
+                            for (let i = 0; i < window.upgradeList.length; i++) {
+                                window.upgradeList[i] = true;
+                            }
+                        }
+                    };
+
+                    PaperclipsModMenu.prototype.getWire = function() {
+                        let amount = parseInt(document.getElementById('wireAmount').value);
+                        if (!isNaN(amount)) {
+                            window.wire = amount;
+                        }
+                    };
+
+                    // Make the menu draggable
+                    PaperclipsModMenu.prototype.makeDraggable = function(element) {
+                        let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+                        let header = document.getElementById('mod-menu-header');
+                        header.onmousedown = dragMouseDown;
+
+                        function dragMouseDown(e) {
+                            e = e || window.event;
+                            e.preventDefault();
+                            pos3 = e.clientX;
+                            pos4 = e.clientY;
+                            document.onmouseup = closeDragElement;
+                            document.onmousemove = elementDrag;
+                        }
+
+                        function elementDrag(e) {
+                            e = e || window.event;
+                            e.preventDefault();
+                            pos1 = pos3 - e.clientX;
+                            pos2 = pos4 - e.clientY;
+                            pos3 = e.clientX;
+                            pos4 = e.clientY;
+                            element.style.top = (element.offsetTop - pos2) + "px";
+                            element.style.left = (element.offsetLeft - pos1) + "px";
+                        }
+
+                        function closeDragElement() {
+                            document.onmouseup = null;
+                            document.onmousemove = null;
+                        }
+                    };
+
+                    // Initialize the Mod Menu
+                    new PaperclipsModMenu();
+                `;
+                document.body.appendChild(script);
+            } else {
+                alert("Incorrect code.");
+            }
+        };
+    </script>
+    <script>// Create and style the button
 const button = document.createElement("button");
 button.innerText = "Additional cheats";
 button.style.position = "fixed";
@@ -1197,8 +1230,6 @@ button.addEventListener("click", () => {
     }
   }
 });
-
-            </script>
-
-    </body>
+</script>
+</body>
 </html>
